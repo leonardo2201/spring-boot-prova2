@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<header>
+		<h1 style="text-align: center; margin-top: 130px">Cadastro de Item</h1>
+	</header>
+	<main>
+		
+		<form th:action="@{/item/save}" class="formSave" th:object="${item}" style="width: 20%; margin: auto; margin-top: 30px">
+			<div class="form-group">
+				Nome do Item: <input name="descricao" placeholder="Caneta bic azul" class="form-control"/><br>
+				Tipo: <input type="text" name="tipo" class="form-control"><br>
+				Valor: <input type="text" name="preco" class="form-control"><br>
+				<button type="submit" class="btn btn-success" >Salvar Item</button>
+				<a th:href="@{/compra/lista}" class="btn btn-primary" style="margin-left: 165px;">Nova Venda</a>
+			</div>
+		</form> 
+		<br>
+	</main>
+</body>
+</html>

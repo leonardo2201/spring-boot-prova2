@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<header>
+		<h1 style="text-align: center; margin-top: 30px">Cadastro de Compras</h1>
+	</header>
+	<main>
+		
+		<form th:action="@{/compra/save}" class="formSave" th:object="${compra}" style="width: 20%; margin: auto; margin-top: 30px">
+			<div class="form-group">
+				<input type="hidden" name="id" th:value="${compra.id}" class="hide" >
+				Nome: <input type="text" name="pessoa" placeholder="Nome do Comprador" th:value="${compra.pessoa}" class="form-control" >
+				Descrição: <textarea name="descricao" th:text="${compra.descricao}" class="form-control"></textarea>
+				Item:<select id="item" name="item" th:value="${compra.item}" class="form-control">
+					 	<option value="">Selecione um item</option>
+						<option th:each="item : ${itens}" th:value="${item.id}" th:text="${item.descricao} + ' R$' + ${item.preco}"></option>
+					 </select>
+					 <br>
+				<a class="btn btn-primary"th:href="@{/item/lista}">Novo Item</a>
+				<button type="submit" class="btn btn-success" style="margin-left: 152px;">Salvar Compra</button><br><br>
+			</div>
+		</form> 
+		
+		<table border="1" class="table table-striped" style="width: 90%; text-align: center; margin:auto;">
+			<thead>
+				<tr>
+					<td><strong>ID</strong></td>
+					<td><strong>Nome</strong></td>
+					<td><strong>Data da compra</strong></td>
+					<td><strong>Descrição</strong></td>
+					<td><strong>Item</strong></td>
+					<td><strong>Valor Total</strong></td>
+					<td colspan="2"></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="compra : ${compras}">
+					<td th:text="${compra.id}"></td>
+					<td th:text="${compra.pessoa}"></td>
+					<td th:text="${compra.data}"></td>
+					<td th:text="${compra.descricao}"></td>
+					<td th:text="${compra.item.descricao}"></td>
+					<td th:text="${compra.total}"></td>
+					<td><a th:href="@{/compra/alterar (id=${compra.id})}">Alterar</a></td>
+					<td><a th:href="@{/compra/delete (id=${compra.id})}">Excluir</a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</main>
+</body>
+</html>
